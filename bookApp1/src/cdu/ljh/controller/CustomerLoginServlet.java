@@ -14,6 +14,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/customer/login"})
 public class CustomerLoginServlet extends HttpServlet {
     CustomerService customerService = new CustomerServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 从客户端获取用户登录信息
@@ -31,7 +32,7 @@ public class CustomerLoginServlet extends HttpServlet {
         // 验证码输入验证
         String inputCode = req.getParameter("inputCode");
         if (inputCode == null || inputCode.isEmpty()) {
-            // 登录失败
+            //登录失败
             System.out.println("Servlet 登录失败: 验证码为空");
             resp.sendRedirect("login.jsp");
             return;

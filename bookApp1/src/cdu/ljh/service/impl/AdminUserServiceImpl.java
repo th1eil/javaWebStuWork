@@ -1,4 +1,6 @@
 package cdu.ljh.service.impl;
+
+import cdu.ljh.dao.AdminUserDao;
 import cdu.ljh.dao.impl.AdminUserDaoImpl;
 import cdu.ljh.model.AdminUser;
 import cdu.ljh.model.User;
@@ -29,7 +31,8 @@ public class AdminUserServiceImpl implements AdminUserService {
         return admin;
     }
     @Override
-    public List<AdminUser> get(AdminUser condition, int page, int pageSize) {return adminUserDao.query(condition, (page - 1) * pageSize, pageSize);
+    public List<AdminUser> get(AdminUser condition, int page, int pageSize) {
+        return adminUserDao.query(condition, (page - 1) * pageSize, pageSize);
     }
     @Override
     public int count(AdminUser condition) {

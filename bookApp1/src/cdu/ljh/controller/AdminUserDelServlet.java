@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet("/admin/adminUser/del")
 public class AdminUserDelServlet extends HttpServlet {
     AdminUserService adminUserService = new AdminUserServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sid = req.getParameter("id");

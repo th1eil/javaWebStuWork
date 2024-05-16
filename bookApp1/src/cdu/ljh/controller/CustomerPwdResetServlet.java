@@ -12,6 +12,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/admin/customer/reset", "/customer/reset"})
 public class CustomerPwdResetServlet extends HttpServlet {
     CustomerService customerService = new CustomerServiceImpl();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sid = req.getParameter("id");
@@ -22,7 +23,7 @@ public class CustomerPwdResetServlet extends HttpServlet {
         if (req.getRequestURI().contains("admin")) {
             //管理员重置顾客密码后，重定向到顾客列表管理界面
             resp.sendRedirect("list");
-        }else {
+        } else {
             //顾客自己重置密码后，重定向到登录界面
             resp.sendRedirect("login.jsp");
         }

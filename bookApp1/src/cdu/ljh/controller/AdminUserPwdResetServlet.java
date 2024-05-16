@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/admin/adminUser/reset","/admin/reset"})
 public class AdminUserPwdResetServlet extends HttpServlet {
     AdminUserService adminUserService = new AdminUserServiceImpl();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sid = req.getParameter("id");

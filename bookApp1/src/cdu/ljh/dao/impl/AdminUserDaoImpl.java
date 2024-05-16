@@ -1,4 +1,6 @@
 package cdu.ljh.dao.impl;
+
+import cdu.ljh.dao.AdminUserDao;
 import cdu.ljh.dao.BaseDao;
 import cdu.ljh.model.AdminUser;
 import cdu.ljh.model.UserStatus;
@@ -18,6 +20,7 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
         }
         return null;
     }
+
     @Override
     public AdminUser find(String name, String password) {
         AdminUser adminUser = null;
@@ -42,6 +45,7 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
         }
         return adminUser;
     }
+
     @Override
     public List<AdminUser> query(AdminUser condition) {
         List<AdminUser> adminUserList = new ArrayList<>();
@@ -62,7 +66,8 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
         System.out.println("DAO查询find(condition) : " + sql);
         try {
             pstmt = conn.prepareStatement(sql);
-            ResultSet rs = pstmt.executeQuery();while (rs.next()) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
                 AdminUser adminUser = new AdminUser();
                 adminUser.setId(rs.getInt("id"));
                 adminUser.setName(rs.getString("name"));
@@ -77,6 +82,7 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
         }
         return adminUserList;
     }
+
     @Override
     public List<AdminUser> query(AdminUser condition, int start, int num) {
         List<AdminUser> adminUserList = new ArrayList<>();
@@ -96,7 +102,8 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
         sql += " ORDER BY id DESC LIMIT ?,?";
         System.out.println("DAO查询find(condition, start, num) : " + sql);
         try {
-            pstmt = conn.prepareStatement(sql);pstmt.setInt(1, start);
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, start);
             pstmt.setInt(2, num);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -114,6 +121,7 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
         }
         return adminUserList;
     }
+
     @Override
     public int insert(AdminUser adminUser) {
         int rows = 0;
@@ -129,7 +137,8 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
             System.out.println("DAO添加管理员出错：" + sql + "," + e.getMessage());
         }
         return rows;
-    }@Override
+    }
+    @Override
     public int update(AdminUser adminUser) {
         int rows = 0;
         String sql = "UPDATE admin_table SET name=?,status=? WHERE id=?";
@@ -161,7 +170,8 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
     @Override
     public int updatePwd(int id, String newPwd) {
         int rows = 0;
-        String sql = "UPDATE admin_table SET password=? WHERE id=?";try {
+        String sql = "UPDATE admin_table SET password=? WHERE id=?";
+        try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newPwd);
             pstmt.setInt(2, id);
@@ -194,7 +204,8 @@ public class AdminUserDaoImpl extends BaseDao implements AdminUserDao {
             pstmt.setInt(1, id);
             rows = pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("DAO删除管理员出错：" + sql + "," + e.getMessage());}
+            System.out.println("DAO删除管理员出错：" + sql + "," + e.getMessage());
+        }
         return rows;
     }
     @Override

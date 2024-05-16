@@ -12,6 +12,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/customer/reg"})
 public class CustomerRegServlet extends HttpServlet {
     CustomerService customerService = new CustomerServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //从客户端获取新用户信息

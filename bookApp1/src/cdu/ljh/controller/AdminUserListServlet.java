@@ -13,6 +13,7 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/admin/adminUser/list", "/admin/adminUser/query"})
 public class AdminUserListServlet extends HttpServlet {
     AdminUserService adminUserService = new AdminUserServiceImpl();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 从客户端获取模糊查询条件
@@ -32,6 +33,7 @@ public class AdminUserListServlet extends HttpServlet {
         int pageCount = usersCount % pageSize == 0 ? usersCount / pageSize : usersCount / pageSize + 1;
         // 调用服务层方法获取到查询结果
         List<AdminUser> adminUserList = adminUserService.get(condition, page, pageSize);
+
         // 在请求范围内保存用户列表数据
         req.setAttribute("adminUsers", adminUserList);
         req.setAttribute("p", page);

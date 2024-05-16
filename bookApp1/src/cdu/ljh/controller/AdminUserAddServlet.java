@@ -12,6 +12,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/admin/adminUser/add"})
 public class AdminUserAddServlet extends HttpServlet {
     AdminUserService adminUserService = new AdminUserServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //从客户端获取新用户信息

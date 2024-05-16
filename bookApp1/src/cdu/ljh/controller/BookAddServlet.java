@@ -11,16 +11,19 @@ import org.apache.commons.fileupload2.core.DiskFileItem;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.jakarta.JakartaServletDiskFileUpload;
 import org.apache.commons.io.FilenameUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.List;
+
 // 后台：管理员添加图书
 @WebServlet("/admin/book/add")
 public class BookAddServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 设置图像文件保存路径
@@ -32,12 +35,13 @@ public class BookAddServlet extends HttpServlet {
         if (!dir.exists()) {
             dir.mkdir();
         }
-// Create a factory for disk-based file items
+        // Create a factory for disk-based file items
         DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
         // Create a new file upload handler
         JakartaServletDiskFileUpload upload = new JakartaServletDiskFileUpload(factory);
         // Parse the request 解析请求
         List<DiskFileItem> fileItems = upload.parseRequest(req);
+
         // 使用commons-fileupload组件分别处理表单域和文件
         // 客户端传递的新添加的图书信息将封装在下面的book对象中
         Book book = null;
@@ -76,8 +80,7 @@ public class BookAddServlet extends HttpServlet {
                         String fileName = item.getName();
                         if (fileName != null) {
                             // 使用当前时间设置新文件名，保留原文件扩展名
-                            fileName =
-                                    new Date().getTime() + "." + FilenameUtils.getExtension(fileName);
+                            fileName = new Date().getTime() + "." + FilenameUtils.getExtension(fileName);
                         }
                         // 在服务器端保存图像，注意在out目录下的cover中查看，而不是源代码的cover目录中查看上传结果
                         item.write(Path.of(saveDir + "//" + fileName));

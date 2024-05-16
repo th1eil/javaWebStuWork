@@ -12,6 +12,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/admin/adminUser/freeze", "/admin/adminUser/active"})
 public class AdminUserModStatusServlet extends HttpServlet {
     AdminUserService adminUserService = new AdminUserServiceImpl();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sid = req.getParameter("id");

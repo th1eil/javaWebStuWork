@@ -13,6 +13,7 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/admin/customer/list", "/admin/customer/query"})
 public class CustomerListServlet extends HttpServlet {
     CustomerService customerService = new CustomerServiceImpl();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 从客户端获取模糊查询条件
@@ -30,7 +31,8 @@ public class CustomerListServlet extends HttpServlet {
         int usersCount = customerService.count(condition);
         int pageCount = usersCount % pageSize == 0 ? usersCount / pageSize : usersCount / pageSize + 1;
         // 从模型层获取到查询结果
-        List<Customer> customerList = customerService.get(condition, page, pageSize);// 在请求范围内保存用户列表数据
+        List<Customer> customerList = customerService.get(condition, page, pageSize);
+        // 在请求范围内保存用户列表数据
         req.setAttribute("customers", customerList);
         req.setAttribute("p", page);
         req.setAttribute("pCount", pageCount);

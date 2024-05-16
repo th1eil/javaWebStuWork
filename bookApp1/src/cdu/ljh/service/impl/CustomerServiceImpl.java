@@ -28,7 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
     public int count(Customer condition) {
         return customerDao.count(condition);
     }
-    @Overridepublic boolean register(Customer customer) {
+    @Override
+    public boolean register(Customer customer) {
         // 顾客注册时将密码加密后再存入数据库中
         customer.setPassword(Encrypt.toMd5(customer.getPassword()));
         customer.setStatus(UserStatus.NORMAL);

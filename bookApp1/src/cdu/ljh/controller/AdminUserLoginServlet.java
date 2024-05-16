@@ -32,7 +32,7 @@ public class AdminUserLoginServlet extends HttpServlet {
         //验证码输入验证
         String inputCode = req.getParameter("inputCode");
         if (inputCode == null || inputCode.isEmpty()) {
-            //登录失败
+            //登陆失败
             System.out.println("Servlet 管理员登录失败: 验证码为空");
             resp.sendRedirect("login.jsp");
             return;

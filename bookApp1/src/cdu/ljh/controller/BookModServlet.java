@@ -11,12 +11,13 @@ import org.apache.commons.fileupload2.core.DiskFileItem;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.jakarta.JakartaServletDiskFileUpload;
 import org.apache.commons.io.FilenameUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.Date;
-import java.util.List;
+import java.util.Date; import java.util.List;
+
 // 后台：管理员修改图书
 @WebServlet("/admin/book/mod")
 public class BookModServlet extends HttpServlet {
@@ -32,12 +33,15 @@ public class BookModServlet extends HttpServlet {
         if (!dir.exists()) {
             dir.mkdir();
         }
+
         // Create a factory for disk-based file items
         DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
         // Create a new file upload handler
         JakartaServletDiskFileUpload upload = new JakartaServletDiskFileUpload(factory);
         // Parse the request 解析请求
         List<DiskFileItem> fileItems = upload.parseRequest(req);
+
+
         // 使用commons-fileupload组件分别处理表单域和文件
         // 客户端传递的新添加的图书信息将封装在下面的book对象中
         Book book = new Book();
@@ -70,7 +74,8 @@ public class BookModServlet extends HttpServlet {
                     book.setStock(Integer.parseInt(item.getString()));
                 }
                 if (item.getFieldName().equals("info")) {
-                    book.setInfo(new String(item.getString().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
+                    book.setInfo(new String(item.getString().getBytes(StandardCharsets.ISO_8859_1),
+                            StandardCharsets.UTF_8));
                 }
                 if (item.getFieldName().equals("publishDate")) {
                     book.setPublishDate(new String(item.getString().getBytes(StandardCharsets.ISO_8859_1),
@@ -93,6 +98,7 @@ public class BookModServlet extends HttpServlet {
                     }
                     // 在服务器端保存图像，注意在out目录下的cover中查看，而不是源代码的cover目录中查看上传结果
                     item.write(Path.of(saveDir + "//" + fileName));
+
                     // 数据库中需要保存上传文件的相对路径，形如: /bookApp1/cover/xxx.png
                     book.setCoverUrl(req.getContextPath() + path + "/" + fileName);
                 }
@@ -109,3 +115,4 @@ public class BookModServlet extends HttpServlet {
         }
     }
 }
+
