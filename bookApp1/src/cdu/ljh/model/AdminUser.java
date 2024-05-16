@@ -1,4 +1,4 @@
 package cdu.ljh.model;
 
-public class AdminUser {
+public class AdminUser extends User {
 }

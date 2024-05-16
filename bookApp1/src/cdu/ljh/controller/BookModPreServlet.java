@@ -7,15 +7,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+
 // 后台：管理员修改图书前获取图书
 @WebServlet("/admin/book/modPre")
-public class BookModPreServlet extends HttpServlet {
-    BookService bookService = new BookServiceImpl();
+public class BookModPreServlet extends HttpServlet { BookService bookService = new BookServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String sid = req.getParameter("id");
-        if (sid != null && !sid.isEmpty()) {
+        if (sid != null && !sid.equals("")) {
             // 调用服务层方法使用客户端传递的id值处理查询图书的业务逻辑
             Book book = bookService.get(Integer.parseInt(sid));
             // 在请求范围内保存查询到的图书对象

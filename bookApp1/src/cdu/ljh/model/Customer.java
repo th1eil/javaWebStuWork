@@ -1,4 +1,3 @@
 package cdu.ljh.model;
-
-public class Customer {
+public class Customer extends User {
 }
